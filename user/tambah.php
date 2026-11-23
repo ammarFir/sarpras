@@ -4,9 +4,10 @@ include __DIR__ . '/../config.php';
 if(isset($_POST['simpan'])){
 
     $nama     = mysqli_real_escape_string($conn, $_POST['nama']);
+    $nip_nik  = mysqli_real_escape_string($conn, $_POST['nip_nik']);
     $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = md5($_POST['password']);
-    $level    = mysqli_real_escape_string($conn, $_POST['level']);
+    $password = $_POST['password'];
+    $hak_akses = mysqli_real_escape_string($conn, $_POST['hak_akses']);
 
     // cek username
     $cek = mysqli_query($conn,"
@@ -29,20 +30,22 @@ if(isset($_POST['simpan'])){
         mysqli_query($conn,"
             INSERT INTO tabel_user(
                 nama,
+                nip_nik,
                 username,
                 password,
-                level
+                hak_akses
             ) VALUES (
                 '$nama',
+                '$nip_nik',
                 '$username',
                 '$password',
-                '$level'
+                '$hak_akses'
             )
         ");
 
         echo "
         <script>
-            alert('Data user berhasil disimpan');
+            alert('Data pengguna berhasil disimpan');
             window.location='halaman.php?menu=user';
         </script>
         ";
@@ -56,8 +59,8 @@ if(isset($_POST['simpan'])){
 
     <div class="card shadow-sm">
 
-        <div class="card-header bg-primary text-white">
-            Tambah User
+        <div class="card-header bg-success text-white">
+            Tambah Pengguna
         </div>
 
         <div class="card-body">
@@ -67,13 +70,25 @@ if(isset($_POST['simpan'])){
                 <div class="mb-3">
 
                     <label class="form-label">
-                        Nama
+                        Nama Lengkap
                     </label>
 
                     <input type="text"
                            name="nama"
                            class="form-control"
                            required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        NIP / NIK
+                    </label>
+
+                    <input type="text"
+                           name="nip_nik"
+                           class="form-control">
 
                 </div>
 
@@ -106,36 +121,31 @@ if(isset($_POST['simpan'])){
                 <div class="mb-3">
 
                     <label class="form-label">
-                        Level
+                        Hak Akses
                     </label>
 
-                    <select name="level"
+                    <select name="hak_akses"
                             class="form-select"
                             required>
 
-                        <option value="">
-                            -- Pilih Level --
+                                               <option value="">
+                            -- Pilih Hak Akses --
                         </option>
 
                         <option value="admin">
                             Admin
                         </option>
 
-                        <option value="petugas">
-                            Petugas
+                        <option value="umum">
+                            Umum
                         </option>
-
-                        <option value="pimpinan">
-                            Pimpinan
-                        </option>
-
                     </select>
 
                 </div>
 
                 <button type="submit"
                         name="simpan"
-                        class="btn btn-primary">
+                        class="btn btn-success">
 
                     Simpan
 

@@ -23,5 +23,9 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+$_SESSION['login'] = true;
+$_SESSION['nama'] = 'Administrator';
+$_SESSION['hak_akses'] = 'admin_sarpras';
+
 ?>
 

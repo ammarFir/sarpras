@@ -64,29 +64,16 @@ $data = mysqli_query($conn,"
                         <td><?= htmlspecialchars($d['username']); ?></td>
 
                         <td>
-
-                            <?php if($d['hak_akses'] == 'admin_sarpras'){ ?>
+                            <?php if($d['hak_akses'] == 'admin'){ ?>
 
                                 <span class="badge bg-danger">
-                                    Admin Sarpras
-                                </span>
-
-                            <?php }elseif($d['hak_akses'] == 'kepala_madrasah'){ ?>
-
-                                <span class="badge bg-primary">
-                                    Kepala Madrasah
-                                </span>
-
-                            <?php }elseif($d['hak_akses'] == 'petugas_ruang'){ ?>
-
-                                <span class="badge bg-warning text-dark">
-                                    Petugas Ruang
+                                    Admin
                                 </span>
 
                             <?php }else{ ?>
 
                                 <span class="badge bg-success">
-                                    Guru
+                                    Umum
                                 </span>
 
                             <?php } ?>
