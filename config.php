@@ -4,7 +4,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "mar1234";
-$db   = "db_koperasi";
+$db   = "db_sarpras";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 

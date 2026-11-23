@@ -13,13 +13,13 @@ $data = mysqli_query($conn,"
     <div class="d-flex justify-content-between align-items-center mb-3">
 
         <h3 class="mb-0">
-            Data User
+            Data Pengguna
         </h3>
 
         <a href="halaman.php?menu=user_tambah"
-           class="btn btn-primary btn-sm">
+           class="btn btn-success btn-sm">
 
-            Tambah User
+            Tambah Pengguna
 
         </a>
 
@@ -32,13 +32,14 @@ $data = mysqli_query($conn,"
             <table id="tabelUser"
                    class="table table-bordered table-striped table-hover align-middle">
 
-                <thead class="table-dark">
+                <thead class="table-success">
 
                     <tr>
                         <th width="60">No</th>
                         <th>Nama</th>
+                        <th>NIP/NIK</th>
                         <th>Username</th>
-                        <th>Level</th>
+                        <th>Hak Akses</th>
                         <th width="200">Aksi</th>
                     </tr>
 
@@ -58,26 +59,34 @@ $data = mysqli_query($conn,"
 
                         <td><?= htmlspecialchars($d['nama']); ?></td>
 
+                        <td><?= htmlspecialchars($d['nip_nik'] ?? '-'); ?></td>
+
                         <td><?= htmlspecialchars($d['username']); ?></td>
 
                         <td>
 
-                            <?php if($d['level'] == 'admin'){ ?>
+                            <?php if($d['hak_akses'] == 'admin_sarpras'){ ?>
 
                                 <span class="badge bg-danger">
-                                    Admin
+                                    Admin Sarpras
                                 </span>
 
-                            <?php }elseif($d['level'] == 'petugas'){ ?>
+                            <?php }elseif($d['hak_akses'] == 'kepala_madrasah'){ ?>
 
                                 <span class="badge bg-primary">
-                                    Petugas
+                                    Kepala Madrasah
+                                </span>
+
+                            <?php }elseif($d['hak_akses'] == 'petugas_ruang'){ ?>
+
+                                <span class="badge bg-warning text-dark">
+                                    Petugas Ruang
                                 </span>
 
                             <?php }else{ ?>
 
                                 <span class="badge bg-success">
-                                    Pimpinan
+                                    Guru
                                 </span>
 
                             <?php } ?>
