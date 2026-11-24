@@ -3,7 +3,7 @@
 switch ($menu) {
 
     // MASTER DATA
-    case 'user':
+case 'user':
         include 'user/index.php';
         break;
 
@@ -21,7 +21,7 @@ switch ($menu) {
 
 
         //kategori
-    case 'kategori':
+case 'kategori':
         include 'kategori/index.php';
         break;
 
@@ -38,7 +38,7 @@ switch ($menu) {
         break;
 
         //ruangan
-    case 'ruangan':
+case 'ruangan':
         include 'ruangan/index.php';
         break;
 
@@ -56,7 +56,7 @@ switch ($menu) {
 
 
         //sumber dana
-    case 'sumber_dana':
+case 'sumber_dana':
         include 'sumber_dana/index.php';
         break;
 
@@ -74,7 +74,7 @@ switch ($menu) {
     
 
         //satuan
-    case 'satuan':
+case 'satuan':
         include 'satuan/index.php';
         break;
 
@@ -91,8 +91,20 @@ switch ($menu) {
         break;
 
     // DATA ASET
-    case 'sarana':
+case 'sarana':
         include 'sarana/index.php';
+        break;
+
+    case 'sarana_tambah':
+        include 'sarana/tambah.php';
+        break;
+
+    case 'sarana_edit':
+        include 'sarana/edit.php';
+        break;
+
+    case 'sarana_delete':
+        include 'sarana/delete.php';
         break;
 
     case 'prasarana_tanah':
