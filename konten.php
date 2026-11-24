@@ -73,8 +73,21 @@ switch ($menu) {
         break;
     
 
+        //satuan
     case 'satuan':
         include 'satuan/index.php';
+        break;
+
+            case 'satuan_tambah':
+        include 'satuan/tambah.php';
+        break;
+
+    case 'satuan_edit':
+        include 'satuan/edit.php';
+        break;
+
+    case 'satuan_delete':
+        include 'satuan/delete.php';
         break;
 
     // DATA ASET
