@@ -205,6 +205,18 @@ case 'sarana':
         include 'pemeliharaan/index.php';
         break;
 
+            case 'pemeliharaan_tambah':
+        include 'pemeliharaan/tambah.php';
+        break;
+
+    case 'pemeliharaan_edit':
+        include 'pemeliharaan/edit.php';
+        break;
+
+    case 'pemeliharaan_delete':
+        include 'pemeliharaan/delete.php';
+        break;
+
 
         //pngehapusan
     case 'penghapusan':
