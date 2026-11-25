@@ -222,6 +222,20 @@ case 'sarana':
     case 'penghapusan':
         include 'penghapusan/index.php';
         break;
+            case 'penghapusan_tambah':
+        include 'penghapusan/tambah.php';
+        break;
+
+    case 'penghapusan_edit':
+        include 'penghapusan/edit.php';
+        break;
+
+    case 'penghapusan_delete':
+        include 'penghapusan/delete.php';
+        break;
+
+
+
 
     // LAPORAN
     case 'lap_sarana':
