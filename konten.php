@@ -161,18 +161,52 @@ case 'sarana':
         include 'barang_masuk/delete.php';
         break;
 
+
+        //mutasi
     case 'mutasi':
         include 'mutasi/index.php';
         break;
 
+            case 'mutasi_tambah':
+        include 'mutasi/tambah.php';
+        break;
+
+    case 'mutasi_edit':
+        include 'mutasi/edit.php';
+        break;
+
+    case 'mutasi_delete':
+        include 'mutasi/delete.php';
+        break;
+
+
+        //peminjaman
     case 'peminjaman':
         include 'peminjaman/index.php';
         break;
+    case 'peminjaman_tambah':
+        include 'peminjaman/tambah.php';
+        break;
 
+    case 'peminjaman_edit':
+        include 'peminjaman/edit.php';
+        break;
+
+    case 'peminjaman_kembali':
+        include 'peminjaman/kembali.php';
+        break;
+
+    case 'peminjaman_delete':
+        include 'peminjaman/delete.php';
+        break;
+
+        //pemeliharaan
     case 'pemeliharaan':
         include 'pemeliharaan/index.php';
         break;
 
+
+        //pngehapusan
     case 'penghapusan':
         include 'penghapusan/index.php';
         break;
