@@ -38,8 +38,8 @@ $data = mysqli_query($conn,"
 
                     <tr>
                         <th width="60">No</th>
-                        <th>Kode Kategori</th>
-                        <th>Nama Kategori</th>
+                        <th>Kode Barang</th>
+                        <th>Nama Barang</th>
                         <th width="200">Aksi</th>
                     </tr>
 

@@ -1,0 +1,163 @@
+<?php
+include __DIR__ . '/../config.php';
+
+$data = mysqli_query($conn,"
+    SELECT
+        bm.*,
+        s.nama_barang,
+        s.kode_barang,
+        d.keterangan AS sumber_dana
+    FROM tabel_barang_masuk bm
+    LEFT JOIN tabel_sarana s ON bm.id_sarana = s.id_sarana
+    LEFT JOIN tabel_sumber_dana d ON bm.id_sumber_dana = d.id_sumber_dana
+    ORDER BY bm.id_barang_masuk DESC
+");
+?>
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h3 class="mb-0">
+            Barang Masuk (Pengadaan)
+        </h3>
+
+        <a href="halaman.php?menu=barang_masuk_tambah"
+           class="btn btn-success btn-sm">
+
+            Tambah Barang Masuk
+
+        </a>
+
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body table-responsive">
+
+            <table id="tabelBarangMasuk"
+                   class="table table-bordered table-striped table-hover align-middle">
+
+                <thead class="table-success">
+
+                    <tr>
+                        <th width="50">No</th>
+                        <th>No. Transaksi</th>
+                        <th>Tanggal</th>
+                        <th>Kode Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah Masuk</th>
+                        <th>Sumber Dana</th>
+                        <th>Bukti Nota</th>
+                        <th width="170">Aksi</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <?php
+                    $no = 1;
+
+                    while($d = mysqli_fetch_assoc($data)){
+                    ?>
+
+                    <tr>
+
+                        <td><?= $no++; ?></td>
+
+                        <td><?= htmlspecialchars($d['no_transaksi']); ?></td>
+
+                        <td><?= date('d-m-Y', strtotime($d['tanggal_masuk'])); ?></td>
+
+                        <td><?= htmlspecialchars($d['kode_barang'] ?? '-'); ?></td>
+
+                        <td><?= htmlspecialchars($d['nama_barang'] ?? '-'); ?></td>
+
+                        <td><?= $d['jumlah_masuk']; ?></td>
+
+                        <td><?= htmlspecialchars($d['sumber_dana'] ?? '-'); ?></td>
+
+                        <td>
+                            <?php if($d['bukti_nota']){ ?>
+                                <a href="assets/uploads/<?= $d['bukti_nota']; ?>" target="_blank" class="btn btn-sm btn-info text-white">Lihat Nota</a>
+                            <?php } else { ?>
+                                -
+                            <?php } ?>
+                        </td>
+
+                        <td>
+
+                            <a href="halaman.php?menu=barang_masuk_edit&id=<?= $d['id_barang_masuk']; ?>"
+                               class="btn btn-warning btn-sm">
+
+                                Edit
+
+                            </a>
+
+                            <a href="halaman.php?menu=barang_masuk_delete&id=<?= $d['id_barang_masuk']; ?>"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Yakin ingin menghapus data ini?')">
+
+                                Hapus
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    <?php } ?>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- DATATABLES CSS -->
+<link rel="stylesheet"
+href="assets/datatable/css/dataTables.bootstrap5.min.css">
+
+<!-- JQUERY -->
+<script src="assets/datatable/jquery-3.7.1.min.js"></script>
+
+<!-- DATATABLES JS -->
+<script src="assets/datatable/jquery.dataTables.min.js"></script>
+
+<script src="assets/datatable/dataTables.bootstrap5.min.js"></script>
+
+<script>
+
+$(document).ready(function(){
+
+    $('#tabelBarangMasuk').DataTable({
+
+        responsive: true,
+        autoWidth: false,
+        language: {
+
+            search: "Cari :",
+            lengthMenu: "Tampilkan _MENU_ data",
+            zeroRecords: "Data tidak ditemukan",
+            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+            paginate: {
+
+                first: "Awal",
+                last: "Akhir",
+                next: "›",
+                previous: "‹"
+
+            }
+
+        }
+
+    });
+
+});
+
+</script>

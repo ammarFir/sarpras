@@ -107,17 +107,58 @@ case 'sarana':
         include 'sarana/delete.php';
         break;
 
+
+        //prasarana tanah
     case 'prasarana_tanah':
         include 'prasarana_tanah/index.php';
         break;
 
+            case 'prasarana_tanah_tambah':
+        include 'prasarana_tanah/tambah.php';
+        break;
+
+    case 'prasarana_tanah_edit':
+        include 'prasarana_tanah/edit.php';
+        break;
+
+    case 'prasarana_tanah_delete':
+        include 'prasarana_tanah/delete.php';
+        break;
+
+
+        //prasarana gedung
     case 'prasarana_gedung':
         include 'prasarana_gedung/index.php';
+        break;
+
+
+            case 'prasarana_gedung_tambah':
+        include 'prasarana_gedung/tambah.php';
+        break;
+
+    case 'prasarana_gedung_edit':
+        include 'prasarana_gedung/edit.php';
+        break;
+
+    case 'prasarana_gedung_delete':
+        include 'prasarana_gedung/delete.php';
         break;
 
     // TRANSAKSI
     case 'barang_masuk':
         include 'barang_masuk/index.php';
+        break;
+
+            case 'barang_masuk_tambah':
+        include 'barang_masuk/tambah.php';
+        break;
+
+    case 'barang_masuk_edit':
+        include 'barang_masuk/edit.php';
+        break;
+
+    case 'barang_masuk_delete':
+        include 'barang_masuk/delete.php';
         break;
 
     case 'mutasi':

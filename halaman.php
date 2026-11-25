@@ -41,7 +41,8 @@ $menu = $_GET['menu'] ?? 'dashboard';
             font-size: 20px;
             font-weight: bold;
             color: white;
-            padding: 20px;
+            padding: 1px;
+          
             text-align: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
@@ -133,11 +134,11 @@ $menu = $_GET['menu'] ?? 'dashboard';
     <!-- SIDEBAR -->
     <div class="sidebar">
 
-        <div class="logo">
-            SIM Sarpras
+                      <div class="logo d-flex align-items-center justify-content-center">
+            <img src="assets/logokemenagnew.png" alt="Logo Kemenag" style="height: 120px; width: auto; margin: -15px 0;">
         </div>
 
-        <div class="mt-3">
+        <div class="mt-2">
 
             <!-- DASHBOARD -->
             <a href="halaman.php"
@@ -407,7 +408,7 @@ $menu = $_GET['menu'] ?? 'dashboard';
             <div>
 
                 <h4 class="mb-0 fw-bold">
-                    Sistem Informasi Sarpras
+                    Inventaris Sarana & Prasarana MTsn 3 Kota Banjarmasin
                 </h4>
 
                 <small class="text-muted">

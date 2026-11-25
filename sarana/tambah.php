@@ -15,6 +15,7 @@ if(isset($_POST['simpan'])){
     $id_ruangan     = (int) $_POST['id_ruangan'];
     $id_sumber_dana = (int) $_POST['id_sumber_dana'];
     $id_satuan      = (int) $_POST['id_satuan'];
+    $keterangan     = mysqli_real_escape_string($conn, $_POST['keterangan']);
 
     $cek = mysqli_query($conn,"
         SELECT *
@@ -46,7 +47,8 @@ if(isset($_POST['simpan'])){
                 id_kategori,
                 id_ruangan,
                 id_sumber_dana,
-                id_satuan
+                id_satuan,
+                keterangan  
             ) VALUES (
                 '$kode_barang',
                 '$nama_barang',
@@ -59,7 +61,8 @@ if(isset($_POST['simpan'])){
                 '$id_kategori',
                 '$id_ruangan',
                 '$id_sumber_dana',
-                '$id_satuan'
+                '$id_satuan',
+                '$keterangan'
             )
         ");
 
@@ -390,6 +393,19 @@ if(isset($_POST['simpan'])){
                         <?php } ?>
 
                     </select>
+
+                </div>
+
+                                <div class="mb-3">
+
+                    <label class="form-label">
+                        Keterangan Tambahan
+                    </label>
+
+                    <textarea name="keterangan"
+                              class="form-control"
+                              rows="3"
+                              placeholder="Opsional, isi jika ada catatan tambahan..."></textarea>
 
                 </div>
 
