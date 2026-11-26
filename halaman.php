@@ -199,13 +199,7 @@ $menu = $_GET['menu'] ?? 'dashboard';
 
                 </a>
 
-                <a href="halaman.php?menu=satuan"
-                    class="nav-link <?= ($menu == 'satuan') ? 'active' : ''; ?>">
-
-                    <i class="bi bi-rulers"></i>
-                    Satuan
-
-                </a>
+            
 
             </div>
 

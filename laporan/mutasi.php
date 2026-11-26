@@ -56,6 +56,8 @@ body { font-family: Arial, Helvetica, sans-serif; }
 
         <div class="card-body">
 
+     
+
             <!-- KOP SURAT -->
             <div class="kop-surat">
                 <img src="../assets/logokemenagnew.png" alt="Logo Kemenag">
