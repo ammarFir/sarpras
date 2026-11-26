@@ -24,7 +24,6 @@ if(isset($_POST['update'])){
     $id_kategori    = (int) $_POST['id_kategori'];
     $id_ruangan     = (int) $_POST['id_ruangan'];
     $id_sumber_dana = (int) $_POST['id_sumber_dana'];
-    $id_satuan      = (int) $_POST['id_satuan'];
     $keterangan     = mysqli_real_escape_string($conn, $_POST['keterangan'] ?? '');
 
     $cek = mysqli_query($conn,"
@@ -59,7 +58,6 @@ if(isset($_POST['update'])){
                 id_kategori='$id_kategori',
                 id_ruangan='$id_ruangan',
                 id_sumber_dana='$id_sumber_dana',
-                id_satuan='$id_satuan',
                 keterangan='$keterangan'
             WHERE id_sarana='$id'
         ");
@@ -151,21 +149,7 @@ if(isset($_POST['update'])){
 
                 <div class="row">
 
-                    <div class="col-md-3">
-                        <div class="mb-3">
-                            <label class="form-label">Satuan</label>
-                            <select name="id_satuan" class="form-select" required>
-                                <?php
-                                $satuan = mysqli_query($conn,"SELECT * FROM tabel_satuan ORDER BY nama_satuan ASC");
-                                while($s = mysqli_fetch_assoc($satuan)){
-                                ?>
-                                <option value="<?= $s['id_satuan']; ?>" <?= ($d['id_satuan'] == $s['id_satuan']) ? 'selected' : ''; ?>>
-                                    <?= htmlspecialchars($s['nama_satuan']); ?>
-                                </option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
+                
 
                     <div class="col-md-3">
                         <div class="mb-3">

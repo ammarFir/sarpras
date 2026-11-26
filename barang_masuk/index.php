@@ -80,7 +80,10 @@ $data = mysqli_query($conn,"
 
                         <td>
                             <?php if($d['bukti_nota']){ ?>
-                                <a href="assets/uploads/<?= $d['bukti_nota']; ?>" target="_blank" class="btn btn-sm btn-info text-white">Lihat Nota</a>
+                                
+                                <a href="halaman.php?menu=barang_masuk_print&id=<?= $d['id_barang_masuk']; ?>"target="_blank"class="btn btn-sm btn-secondary mt-1 d-block">
+                                Cetak Nota
+                            </a>
                             <?php } else { ?>
                                 -
                             <?php } ?>

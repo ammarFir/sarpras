@@ -73,23 +73,6 @@ case 'sumber_dana':
         break;
     
 
-        //satuan
-case 'satuan':
-        include 'satuan/index.php';
-        break;
-
-            case 'satuan_tambah':
-        include 'satuan/tambah.php';
-        break;
-
-    case 'satuan_edit':
-        include 'satuan/edit.php';
-        break;
-
-    case 'satuan_delete':
-        include 'satuan/delete.php';
-        break;
-
     // DATA ASET
 case 'sarana':
         include 'sarana/index.php';
@@ -159,6 +142,10 @@ case 'sarana':
 
     case 'barang_masuk_delete':
         include 'barang_masuk/delete.php';
+        break;
+
+            case 'barang_masuk_print':
+        include 'barang_masuk/print.php';
         break;
 
 
