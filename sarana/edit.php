@@ -21,9 +21,9 @@ if(isset($_POST['update'])){
     $harga_perolehan = mysqli_real_escape_string($conn, $_POST['harga_perolehan']);
     $jumlah         = (int) $_POST['jumlah'];
     $kondisi        = mysqli_real_escape_string($conn, $_POST['kondisi']);
-    $id_kategori    = (int) $_POST['id_kategori'];
-    $id_ruangan     = (int) $_POST['id_ruangan'];
-    $id_sumber_dana = (int) $_POST['id_sumber_dana'];
+    $id_kategori    = mysqli_real_escape_string($conn, $_POST['id_kategori']);
+    $id_ruangan     = mysqli_real_escape_string($conn, $_POST['id_ruangan']);
+    $id_sumber_dana = mysqli_real_escape_string($conn, $_POST['id_sumber_dana']);
     $keterangan     = mysqli_real_escape_string($conn, $_POST['keterangan'] ?? '');
 
     $cek = mysqli_query($conn,"
@@ -149,48 +149,24 @@ if(isset($_POST['update'])){
 
                 <div class="row">
 
-                
-
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label class="form-label">Kondisi</label>
-                            <select name="kondisi" class="form-select" required>
-                                <option value="Baik" <?= ($d['kondisi'] == 'Baik') ? 'selected' : ''; ?>>Baik</option>
-                                <option value="Rusak Ringan" <?= ($d['kondisi'] == 'Rusak Ringan') ? 'selected' : ''; ?>>Rusak Ringan</option>
-                                <option value="Rusak Berat" <?= ($d['kondisi'] == 'Rusak Berat') ? 'selected' : ''; ?>>Rusak Berat</option>
-                            </select>
+                            <input type="text" name="kondisi" value="<?= htmlspecialchars($d['kondisi']); ?>" class="form-control" required>
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label class="form-label">Kategori</label>
-                            <select name="id_kategori" class="form-select" required>
-                                <?php
-                                $kategori = mysqli_query($conn,"SELECT * FROM tabel_kategori ORDER BY nama_kategori ASC");
-                                while($k = mysqli_fetch_assoc($kategori)){
-                                ?>
-                                <option value="<?= $k['id_kategori']; ?>" <?= ($d['id_kategori'] == $k['id_kategori']) ? 'selected' : ''; ?>>
-                                    <?= htmlspecialchars($k['nama_kategori']); ?>
-                                </option>
-                                <?php } ?>
-                            </select>
+                            <input type="text" name="id_kategori" value="<?= htmlspecialchars($d['id_kategori']); ?>" class="form-control" required>
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label class="form-label">Ruangan</label>
-                            <select name="id_ruangan" class="form-select" required>
-                                <?php
-                                $ruangan = mysqli_query($conn,"SELECT * FROM tabel_ruangan ORDER BY nama_ruangan ASC");
-                                while($r = mysqli_fetch_assoc($ruangan)){
-                                ?>
-                                <option value="<?= $r['id_ruangan']; ?>" <?= ($d['id_ruangan'] == $r['id_ruangan']) ? 'selected' : ''; ?>>
-                                    <?= htmlspecialchars($r['nama_ruangan']); ?>
-                                </option>
-                                <?php } ?>
-                            </select>
+                            <input type="text" name="id_ruangan" value="<?= htmlspecialchars($d['id_ruangan']); ?>" class="form-control" required>
                         </div>
                     </div>
 
@@ -198,16 +174,7 @@ if(isset($_POST['update'])){
 
                 <div class="mb-3">
                     <label class="form-label">Sumber Dana</label>
-                    <select name="id_sumber_dana" class="form-select" required>
-                        <?php
-                        $dana = mysqli_query($conn,"SELECT * FROM tabel_sumber_dana ORDER BY keterangan ASC");
-                        while($dn = mysqli_fetch_assoc($dana)){
-                        ?>
-                        <option value="<?= $dn['id_sumber_dana']; ?>" <?= ($d['id_sumber_dana'] == $dn['id_sumber_dana']) ? 'selected' : ''; ?>>
-                            <?= htmlspecialchars($dn['keterangan']); ?>
-                        </option>
-                        <?php } ?>
-                    </select>
+                    <input type="text" name="id_sumber_dana" value="<?= htmlspecialchars($d['id_sumber_dana']); ?>" class="form-control" required>
                 </div>
 
                 <div class="mb-3">

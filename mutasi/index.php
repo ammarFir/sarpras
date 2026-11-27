@@ -2,17 +2,9 @@
 include __DIR__ . '/../config.php';
 
 $data = mysqli_query($conn,"
-    SELECT
-        m.*,
-        s.nama_barang,
-        s.kode_barang,
-        asal.nama_ruangan AS ruangan_asal,
-        tujuan.nama_ruangan AS ruangan_tujuan
-    FROM tabel_mutasi m
-    LEFT JOIN tabel_sarana s ON m.id_sarana = s.id_sarana
-    LEFT JOIN tabel_ruangan asal ON m.id_ruangan_asal = asal.id_ruangan
-    LEFT JOIN tabel_ruangan tujuan ON m.id_ruangan_tujuan = tujuan.id_ruangan
-    ORDER BY m.id_mutasi DESC
+    SELECT *
+    FROM tabel_mutasi
+    ORDER BY id_mutasi DESC
 ");
 ?>
 
@@ -45,7 +37,6 @@ $data = mysqli_query($conn,"
                     <tr>
                         <th width="50">No</th>
                         <th>Tanggal</th>
-                        <th>Kode Barang</th>
                         <th>Nama Barang</th>
                         <th>Dari Ruangan</th>
                         <th>Ke Ruangan</th>
@@ -69,13 +60,11 @@ $data = mysqli_query($conn,"
 
                         <td><?= date('d-m-Y', strtotime($d['tanggal_mutasi'])); ?></td>
 
-                        <td><?= htmlspecialchars($d['kode_barang'] ?? '-'); ?></td>
+                        <td><?= htmlspecialchars($d['id_sarana']); ?></td>
 
-                        <td><?= htmlspecialchars($d['nama_barang'] ?? '-'); ?></td>
+                        <td><?= htmlspecialchars($d['id_ruangan_asal'] ?? '-'); ?></td>
 
-                        <td><?= htmlspecialchars($d['ruangan_asal'] ?? '-'); ?></td>
-
-                        <td><?= htmlspecialchars($d['ruangan_tujuan'] ?? '-'); ?></td>
+                        <td><?= htmlspecialchars($d['id_ruangan_tujuan']); ?></td>
 
                         <td><?= $d['jumlah']; ?></td>
 

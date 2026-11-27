@@ -4,17 +4,18 @@ include __DIR__ . '/../config.php';
 if(isset($_POST['simpan'])){
 
     $tanggal_perbaikan  = mysqli_real_escape_string($conn, $_POST['tanggal_perbaikan']);
-    $jenis_aset         = $_POST['jenis_aset']; // 'sarana' atau 'gedung'
-    $id_sarana          = ($jenis_aset == 'sarana') ? (int)$_POST['id_sarana'] : 'NULL';
-    $id_gedung          = ($jenis_aset == 'gedung') ? (int)$_POST['id_gedung'] : 'NULL';
+    $jenis_aset         = $_POST['jenis_aset'];
+    $id_sarana          = mysqli_real_escape_string($conn, $_POST['id_sarana']);
+    $id_gedung          = mysqli_real_escape_string($conn, $_POST['id_gedung']);
     
     $deskripsi_kerusakan = mysqli_real_escape_string($conn, $_POST['deskripsi_kerusakan']);
     $tindakan_perbaikan  = mysqli_real_escape_string($conn, $_POST['tindakan_perbaikan']);
     $biaya               = (float) $_POST['biaya'];
     $status              = mysqli_real_escape_string($conn, $_POST['status']);
 
-    $id_sarana_query = ($id_sarana === 'NULL') ? "NULL" : "'$id_sarana'";
-    $id_gedung_query = ($id_gedung === 'NULL') ? "NULL" : "'$id_gedung'";
+    // Simpan data (jika pilih sarana, id_gedung di-null-kan, dan sebaliknya)
+    $id_sarana_db = ($jenis_aset == 'sarana') ? "'$id_sarana'" : "NULL";
+    $id_gedung_db = ($jenis_aset == 'gedung') ? "'$id_gedung'" : "NULL";
 
     mysqli_query($conn,"
         INSERT INTO tabel_pemeliharaan(
@@ -27,8 +28,8 @@ if(isset($_POST['simpan'])){
             status
         ) VALUES (
             '$tanggal_perbaikan',
-            $id_sarana_query,
-            $id_gedung_query,
+            $id_sarana_db,
+            $id_gedung_db,
             '$deskripsi_kerusakan',
             '$tindakan_perbaikan',
             '$biaya',
@@ -73,36 +74,16 @@ if(isset($_POST['simpan'])){
                     </div>
                 </div>
 
-                <!-- Dropdown Sarana -->
+                <!-- Input Sarana -->
                 <div class="mb-3" id="box_sarana">
-                    <label class="form-label">Pilih Barang (Sarana)</label>
-                    <select name="id_sarana" class="form-select">
-                        <option value="">-- Pilih Barang --</option>
-                        <?php
-                        $sarana = mysqli_query($conn,"SELECT id_sarana, kode_barang, nama_barang FROM tabel_sarana ORDER BY nama_barang ASC");
-                        while($s = mysqli_fetch_assoc($sarana)){
-                        ?>
-                        <option value="<?= $s['id_sarana']; ?>">
-                            <?= htmlspecialchars($s['kode_barang'] . ' - ' . $s['nama_barang']); ?>
-                        </option>
-                        <?php } ?>
-                    </select>
+                    <label class="form-label">Nama Barang (Sarana)</label>
+                    <input type="text" name="id_sarana" class="form-control" placeholder="Ketik nama barang..." required>
                 </div>
 
-                <!-- Dropdown Gedung (Hidden by default) -->
+                <!-- Input Gedung (Hidden by default) -->
                 <div class="mb-3 d-none" id="box_gedung">
-                    <label class="form-label">Pilih Gedung (Prasarana)</label>
-                    <select name="id_gedung" class="form-select">
-                        <option value="">-- Pilih Gedung --</option>
-                        <?php
-                        $gedung = mysqli_query($conn,"SELECT id_gedung, kode_gedung, nama_gedung FROM tabel_prasarana_gedung ORDER BY nama_gedung ASC");
-                        while($g = mysqli_fetch_assoc($gedung)){
-                        ?>
-                        <option value="<?= $g['id_gedung']; ?>">
-                            <?= htmlspecialchars($g['kode_gedung'] . ' - ' . $g['nama_gedung']); ?>
-                        </option>
-                        <?php } ?>
-                    </select>
+                    <label class="form-label">Nama Gedung (Prasarana)</label>
+                    <input type="text" name="id_gedung" class="form-control" placeholder="Ketik nama gedung...">
                 </div>
 
                 <div class="mb-3">
@@ -122,11 +103,7 @@ if(isset($_POST['simpan'])){
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Status Pengerjaan</label>
-                        <select name="status" class="form-select" required>
-                            <option value="Proses">Proses</option>
-                            <option value="Selesai">Selesai</option>
-                            <option value="Gagal">Gagal</option>
-                        </select>
+                        <input type="text" name="status" class="form-control" placeholder="Contoh: Proses / Selesai" required>
                     </div>
                 </div>
 

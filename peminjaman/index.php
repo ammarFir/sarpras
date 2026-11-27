@@ -2,13 +2,9 @@
 include __DIR__ . '/../config.php';
 
 $data = mysqli_query($conn,"
-    SELECT
-        p.*,
-        s.nama_barang,
-        s.kode_barang
-    FROM tabel_peminjaman p
-    LEFT JOIN tabel_sarana s ON p.id_sarana = s.id_sarana
-    ORDER BY p.id_peminjaman DESC
+    SELECT *
+    FROM tabel_peminjaman
+    ORDER BY id_peminjaman DESC
 ");
 ?>
 
@@ -67,10 +63,7 @@ $data = mysqli_query($conn,"
 
                         <td><?= htmlspecialchars($d['nama_peminjam']); ?></td>
 
-                        <td>
-                            <?= htmlspecialchars($d['kode_barang'] ?? '-'); ?> <br>
-                            <small class="text-muted"><?= htmlspecialchars($d['nama_barang'] ?? '-'); ?></small>
-                        </td>
+                        <td><?= htmlspecialchars($d['id_sarana']); ?></td>
 
                         <td><?= date('d-m-Y', strtotime($d['tanggal_pinjam'])); ?></td>
 

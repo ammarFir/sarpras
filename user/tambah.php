@@ -124,22 +124,12 @@ if(isset($_POST['simpan'])){
                         Hak Akses
                     </label>
 
-                    <select name="hak_akses"
-                            class="form-select"
-                            required>
 
-                                               <option value="">
-                            -- Pilih Hak Akses --
-                        </option>
-
-                        <option value="admin">
-                            Admin
-                        </option>
-
-                        <option value="umum">
-                            Umum
-                        </option>
-                    </select>
+                                        <input type="text"
+                           name="hak_akses"
+                           class="form-control"
+                           placeholder="Contoh: Admin / Umum"
+                           required>
 
                 </div>
 

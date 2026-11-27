@@ -2,14 +2,9 @@
 include __DIR__ . '/../config.php';
 
 $data = mysqli_query($conn,"
-    SELECT
-        pm.*,
-        s.nama_barang AS nama_sarana,
-        g.nama_gedung
-    FROM tabel_pemeliharaan pm
-    LEFT JOIN tabel_sarana s ON pm.id_sarana = s.id_sarana
-    LEFT JOIN tabel_prasarana_gedung g ON pm.id_gedung = g.id_gedung
-    ORDER BY pm.id_pemeliharaan DESC
+    SELECT *
+    FROM tabel_pemeliharaan
+    ORDER BY id_pemeliharaan DESC
 ");
 ?>
 
@@ -58,9 +53,9 @@ $data = mysqli_query($conn,"
 
                     while($d = mysqli_fetch_assoc($data)){
 
-                        $nama_aset = $d['nama_sarana'];
-                        if($d['nama_gedung']){
-                            $nama_aset = "Gedung: " . $d['nama_gedung'];
+                        $nama_aset = $d['id_sarana'];
+                        if($d['id_gedung']){
+                            $nama_aset = "Gedung: " . $d['id_gedung'];
                         }
                     ?>
 
@@ -76,17 +71,7 @@ $data = mysqli_query($conn,"
 
                         <td>Rp <?= number_format($d['biaya'] ?? 0, 0, ',', '.'); ?></td>
 
-                        <td>
-
-                            <?php if($d['status'] == 'Proses'){ ?>
-                                <span class="badge bg-warning text-dark">Proses</span>
-                            <?php }elseif($d['status'] == 'Selesai'){ ?>
-                                <span class="badge bg-success">Selesai</span>
-                            <?php }else{ ?>
-                                <span class="badge bg-danger">Gagal</span>
-                            <?php } ?>
-
-                        </td>
+                        <td><?= htmlspecialchars($d['status']); ?></td>
 
                         <td>
 

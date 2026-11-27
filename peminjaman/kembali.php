@@ -4,10 +4,9 @@ include __DIR__ . '/../config.php';
 $id = $_GET['id'];
 
 $data = mysqli_query($conn,"
-    SELECT p.*, s.nama_barang 
-    FROM tabel_peminjaman p
-    JOIN tabel_sarana s ON p.id_sarana = s.id_sarana
-    WHERE p.id_peminjaman='$id'
+    SELECT *
+    FROM tabel_peminjaman
+    WHERE id_peminjaman='$id'
 ");
 
 $d = mysqli_fetch_assoc($data);
@@ -47,63 +46,42 @@ if(isset($_POST['kembalikan'])){
 
         <div class="card-body">
 
+            <?php if($d){ ?>
             <div class="alert alert-info">
                 <strong>Info Peminjaman:</strong> <br>
                 Peminjam: <?= htmlspecialchars($d['nama_peminjam']); ?> <br>
-                Barang: <?= htmlspecialchars($d['nama_barang']); ?> (<?= $d['jumlah_pinjam']; ?> Unit) <br>
+                Barang: <?= htmlspecialchars($d['id_sarana']); ?> (<?= $d['jumlah_pinjam']; ?> Unit) <br>
                 Rencana Kembali: <?= date('d-m-Y', strtotime($d['rencana_kembali'])); ?>
             </div>
 
             <form method="POST">
 
                 <div class="mb-3">
-
-                    <label class="form-label">
-                        Tanggal Kembali Aktual
-                    </label>
-
-                    <input type="date"
-                           name="tanggal_kembali"
-                           class="form-control"
-                           value="<?= date('Y-m-d'); ?>"
-                           required>
-
+                    <label class="form-label">Tanggal Kembali Aktual</label>
+                    <input type="date" name="tanggal_kembali" class="form-control" value="<?= date('Y-m-d'); ?>" required>
                 </div>
 
                 <div class="mb-3">
-
-                    <label class="form-label">
-                        Kondisi Barang Saat Dikembalikan
-                    </label>
-
-                    <select name="kondisi_kembali"
-                            class="form-select"
-                            required>
-
+                    <label class="form-label">Kondisi Barang Saat Dikembalikan</label>
+                    <select name="kondisi_kembali" class="form-select" required>
                         <option value="Baik">Baik</option>
                         <option value="Rusak Ringan">Rusak Ringan</option>
                         <option value="Rusak Berat">Rusak Berat</option>
-
                     </select>
-
                 </div>
 
-                <button type="submit"
-                        name="kembalikan"
-                        class="btn btn-primary">
-
+                <button type="submit" name="kembalikan" class="btn btn-primary">
                     Konfirmasi Pengembalian
-
                 </button>
 
-                <a href="halaman.php?menu=peminjaman"
-                   class="btn btn-secondary">
-
+                <a href="halaman.php?menu=peminjaman" class="btn btn-secondary">
                     Batal
-
                 </a>
 
             </form>
+            <?php } else { ?>
+                <div class="alert alert-danger">Data peminjaman tidak ditemukan.</div>
+            <?php } ?>
 
         </div>
 

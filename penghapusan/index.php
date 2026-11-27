@@ -2,13 +2,9 @@
 include __DIR__ . '/../config.php';
 
 $data = mysqli_query($conn,"
-    SELECT
-        p.*,
-        s.nama_barang,
-        s.kode_barang
-    FROM tabel_penghapusan p
-    LEFT JOIN tabel_sarana s ON p.id_sarana = s.id_sarana
-    ORDER BY p.id_penghapusan DESC
+    SELECT *
+    FROM tabel_penghapusan
+    ORDER BY id_penghapusan DESC
 ");
 ?>
 
@@ -41,7 +37,6 @@ $data = mysqli_query($conn,"
                     <tr>
                         <th width="50">No</th>
                         <th>Tanggal</th>
-                        <th>Kode Barang</th>
                         <th>Nama Barang</th>
                         <th>Jumlah Dihapus</th>
                         <th>Alasan</th>
@@ -65,21 +60,11 @@ $data = mysqli_query($conn,"
 
                         <td><?= date('d-m-Y', strtotime($d['tanggal_penghapusan'])); ?></td>
 
-                        <td><?= htmlspecialchars($d['kode_barang'] ?? '-'); ?></td>
-
-                        <td><?= htmlspecialchars($d['nama_barang'] ?? '-'); ?></td>
+                        <td><?= htmlspecialchars($d['id_sarana']); ?></td>
 
                         <td><?= $d['jumlah']; ?></td>
 
-                        <td>
-                            <?php if($d['alasan'] == 'Rusak Berat'){ ?>
-                                <span class="badge bg-danger">Rusak Berat</span>
-                            <?php }elseif($d['alasan'] == 'Hilang'){ ?>
-                                <span class="badge bg-dark">Hilang</span>
-                            <?php }else{ ?>
-                                <span class="badge bg-secondary">Usang</span>
-                            <?php } ?>
-                        </td>
+                        <td><?= htmlspecialchars($d['alasan']); ?></td>
 
                         <td><?= htmlspecialchars($d['no_berita_acara'] ?? '-'); ?></td>
 

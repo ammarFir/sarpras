@@ -5,7 +5,7 @@ if(isset($_POST['simpan'])){
 
     $kode_peminjaman = mysqli_real_escape_string($conn, $_POST['kode_peminjaman']);
     $nama_peminjam   = mysqli_real_escape_string($conn, $_POST['nama_peminjam']);
-    $id_sarana       = (int) $_POST['id_sarana'];
+    $id_sarana       = mysqli_real_escape_string($conn, $_POST['id_sarana']);
     $jumlah_pinjam   = (int) $_POST['jumlah_pinjam'];
     $tanggal_pinjam  = mysqli_real_escape_string($conn, $_POST['tanggal_pinjam']);
     $rencana_kembali = mysqli_real_escape_string($conn, $_POST['rencana_kembali']);
@@ -28,7 +28,6 @@ if(isset($_POST['simpan'])){
 
     }else{
 
-        // Simpan data peminjaman
         mysqli_query($conn,"
             INSERT INTO tabel_peminjaman(
                 kode_peminjaman,
@@ -76,39 +75,17 @@ if(isset($_POST['simpan'])){
                 <div class="row">
 
                     <div class="col-md-6">
-
                         <div class="mb-3">
-
-                            <label class="form-label">
-                                Kode Peminjaman
-                            </label>
-
-                            <input type="text"
-                                   name="kode_peminjaman"
-                                   class="form-control"
-                                   placeholder="Contoh: PJM-20231124-001"
-                                   required>
-
+                            <label class="form-label">Kode Peminjaman</label>
+                            <input type="text" name="kode_peminjaman" class="form-control" placeholder="Contoh: PJM-20231124-001" required>
                         </div>
-
                     </div>
 
                     <div class="col-md-6">
-
                         <div class="mb-3">
-
-                            <label class="form-label">
-                                Nama Peminjam
-                            </label>
-
-                            <input type="text"
-                                   name="nama_peminjam"
-                                   class="form-control"
-                                   placeholder="Guru / Siswa / Staf"
-                                   required>
-
+                            <label class="form-label">Nama Peminjam</label>
+                            <input type="text" name="nama_peminjam" class="form-control" placeholder="Guru / Siswa / Staf" required>
                         </div>
-
                     </div>
 
                 </div>
@@ -116,59 +93,17 @@ if(isset($_POST['simpan'])){
                 <div class="row">
 
                     <div class="col-md-6">
-
                         <div class="mb-3">
-
-                            <label class="form-label">
-                                Pilih Barang (Sarana)
-                            </label>
-
-                            <select name="id_sarana"
-                                    class="form-select"
-                                    required>
-
-                                <option value="">
-                                    -- Pilih Barang --
-                                </option>
-
-                                <?php
-                                $sarana = mysqli_query($conn,"
-                                    SELECT id_sarana, kode_barang, nama_barang
-                                    FROM tabel_sarana
-                                    ORDER BY nama_barang ASC
-                                ");
-
-                                while($s = mysqli_fetch_assoc($sarana)){
-                                ?>
-
-                                <option value="<?= $s['id_sarana']; ?>">
-                                    <?= htmlspecialchars($s['kode_barang'] . ' - ' . $s['nama_barang']); ?>
-                                </option>
-
-                                <?php } ?>
-
-                            </select>
-
+                            <label class="form-label">Nama Barang (Sarana)</label>
+                            <input type="text" name="id_sarana" class="form-control" placeholder="Ketik nama barang..." required>
                         </div>
-
                     </div>
 
                     <div class="col-md-6">
-
                         <div class="mb-3">
-
-                            <label class="form-label">
-                                Jumlah Dipinjam
-                            </label>
-
-                            <input type="number"
-                                   name="jumlah_pinjam"
-                                   class="form-control"
-                                   min="1"
-                                   required>
-
+                            <label class="form-label">Jumlah Dipinjam</label>
+                            <input type="number" name="jumlah_pinjam" class="form-control" min="1" required>
                         </div>
-
                     </div>
 
                 </div>
@@ -176,57 +111,23 @@ if(isset($_POST['simpan'])){
                 <div class="row">
 
                     <div class="col-md-6">
-
                         <div class="mb-3">
-
-                            <label class="form-label">
-                                Tanggal Pinjam
-                            </label>
-
-                            <input type="date"
-                                   name="tanggal_pinjam"
-                                   class="form-control"
-                                   value="<?= date('Y-m-d'); ?>"
-                                   required>
-
+                            <label class="form-label">Tanggal Pinjam</label>
+                            <input type="date" name="tanggal_pinjam" class="form-control" value="<?= date('Y-m-d'); ?>" required>
                         </div>
-
                     </div>
 
                     <div class="col-md-6">
-
                         <div class="mb-3">
-
-                            <label class="form-label">
-                                Rencana Kembali
-                            </label>
-
-                            <input type="date"
-                                   name="rencana_kembali"
-                                   class="form-control"
-                                   value="<?= date('Y-m-d', strtotime('+3 days')); ?>"
-                                   required>
-
+                            <label class="form-label">Rencana Kembali</label>
+                            <input type="date" name="rencana_kembali" class="form-control" value="<?= date('Y-m-d', strtotime('+3 days')); ?>" required>
                         </div>
-
                     </div>
 
                 </div>
 
-                <button type="submit"
-                        name="simpan"
-                        class="btn btn-success">
-
-                    Simpan Peminjaman
-
-                </button>
-
-                <a href="halaman.php?menu=peminjaman"
-                   class="btn btn-secondary">
-
-                    Kembali
-
-                </a>
+                <button type="submit" name="simpan" class="btn btn-success">Simpan Peminjaman</button>
+                <a href="halaman.php?menu=peminjaman" class="btn btn-secondary">Kembali</a>
 
             </form>
 

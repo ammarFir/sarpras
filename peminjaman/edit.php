@@ -15,7 +15,7 @@ if(isset($_POST['update'])){
 
     $kode_peminjaman = mysqli_real_escape_string($conn, $_POST['kode_peminjaman']);
     $nama_peminjam   = mysqli_real_escape_string($conn, $_POST['nama_peminjam']);
-    $id_sarana       = (int) $_POST['id_sarana'];
+    $id_sarana       = mysqli_real_escape_string($conn, $_POST['id_sarana']);
     $jumlah_pinjam   = (int) $_POST['jumlah_pinjam'];
     $tanggal_pinjam  = mysqli_real_escape_string($conn, $_POST['tanggal_pinjam']);
     $rencana_kembali = mysqli_real_escape_string($conn, $_POST['rencana_kembali']);
@@ -96,17 +96,8 @@ if(isset($_POST['update'])){
 
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label class="form-label">Pilih Barang (Sarana)</label>
-                            <select name="id_sarana" class="form-select" required>
-                                <?php
-                                $sarana = mysqli_query($conn,"SELECT id_sarana, kode_barang, nama_barang FROM tabel_sarana ORDER BY nama_barang ASC");
-                                while($s = mysqli_fetch_assoc($sarana)){
-                                ?>
-                                <option value="<?= $s['id_sarana']; ?>" <?= ($d['id_sarana'] == $s['id_sarana']) ? 'selected' : ''; ?>>
-                                    <?= htmlspecialchars($s['kode_barang'] . ' - ' . $s['nama_barang']); ?>
-                                </option>
-                                <?php } ?>
-                            </select>
+                            <label class="form-label">Nama Barang (Sarana)</label>
+                            <input type="text" name="id_sarana" value="<?= htmlspecialchars($d['id_sarana']); ?>" class="form-control" required>
                         </div>
                     </div>
 

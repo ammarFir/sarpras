@@ -2,15 +2,9 @@
 include __DIR__ . '/../config.php';
 
 $data = mysqli_query($conn,"
-    SELECT
-        bm.*,
-        s.nama_barang,
-        s.kode_barang,
-        d.keterangan AS sumber_dana
-    FROM tabel_barang_masuk bm
-    LEFT JOIN tabel_sarana s ON bm.id_sarana = s.id_sarana
-    LEFT JOIN tabel_sumber_dana d ON bm.id_sumber_dana = d.id_sumber_dana
-    ORDER BY bm.id_barang_masuk DESC
+    SELECT *
+    FROM tabel_barang_masuk
+    ORDER BY id_barang_masuk DESC
 ");
 ?>
 
@@ -44,11 +38,9 @@ $data = mysqli_query($conn,"
                         <th width="50">No</th>
                         <th>No. Transaksi</th>
                         <th>Tanggal</th>
-                        <th>Kode Barang</th>
                         <th>Nama Barang</th>
                         <th>Jumlah Masuk</th>
                         <th>Sumber Dana</th>
-                        <th>Bukti Nota</th>
                         <th width="170">Aksi</th>
                     </tr>
 
@@ -70,24 +62,11 @@ $data = mysqli_query($conn,"
 
                         <td><?= date('d-m-Y', strtotime($d['tanggal_masuk'])); ?></td>
 
-                        <td><?= htmlspecialchars($d['kode_barang'] ?? '-'); ?></td>
-
-                        <td><?= htmlspecialchars($d['nama_barang'] ?? '-'); ?></td>
+                        <td><?= htmlspecialchars($d['id_sarana']); ?></td>
 
                         <td><?= $d['jumlah_masuk']; ?></td>
 
-                        <td><?= htmlspecialchars($d['sumber_dana'] ?? '-'); ?></td>
-
-                        <td>
-                            <?php if($d['bukti_nota']){ ?>
-                                
-                                <a href="halaman.php?menu=barang_masuk_print&id=<?= $d['id_barang_masuk']; ?>"target="_blank"class="btn btn-sm btn-secondary mt-1 d-block">
-                                Cetak Nota
-                            </a>
-                            <?php } else { ?>
-                                -
-                            <?php } ?>
-                        </td>
+                        <td><?= htmlspecialchars($d['id_sumber_dana']); ?></td>
 
                         <td>
 

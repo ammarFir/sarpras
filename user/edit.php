@@ -154,26 +154,11 @@ if(isset($_POST['update'])){
                     <label class="form-label">
                         Hak Akses
                     </label>
-
-                    <select name="hak_akses"
-                            class="form-select"
-                            required>
-
-                                                    <option value="admin"
-                            <?= ($d['hak_akses'] == 'admin') ? 'selected' : ''; ?>>
-
-                            Admin
-
-                        </option>
-
-                        <option value="umum"
-                            <?= ($d['hak_akses'] == 'umum') ? 'selected' : ''; ?>>
-
-                            Umum
-
-                        </option>
-
-                    </select>
+                    <input type="text"
+                           name="hak_akses"
+                           value="<?= htmlspecialchars($d['hak_akses']); ?>"
+                           class="form-control"
+                           required>
 
                 </div>
 

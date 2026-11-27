@@ -159,26 +159,13 @@ if(isset($_POST['update'])){
                                 Kondisi
                             </label>
 
-                            <select name="kondisi"
-                                    class="form-select"
-                                    required>
+                                                       <input type="text"
+                                   name="kondisi"
+                                   value="<?= htmlspecialchars($d['kondisi']); ?>"
+                                   class="form-control"
+                                   required>
 
-                                <option value="Baik"
-                                    <?= ($d['kondisi'] == 'Baik') ? 'selected' : ''; ?>>
-                                    Baik
-                                </option>
 
-                                <option value="Rusak Ringan"
-                                    <?= ($d['kondisi'] == 'Rusak Ringan') ? 'selected' : ''; ?>>
-                                    Rusak Ringan
-                                </option>
-
-                                <option value="Rusak Berat"
-                                    <?= ($d['kondisi'] == 'Rusak Berat') ? 'selected' : ''; ?>>
-                                    Rusak Berat
-                                </option>
-
-                            </select>
 
                         </div>
 

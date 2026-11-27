@@ -149,15 +149,12 @@ if(isset($_POST['simpan'])){
                                 Kondisi
                             </label>
 
-                            <select name="kondisi"
-                                    class="form-select"
-                                    required>
-
-                                <option value="Baik">Baik</option>
-                                <option value="Rusak Ringan">Rusak Ringan</option>
-                                <option value="Rusak Berat">Rusak Berat</option>
-
-                            </select>
+                            
+                            <input type="text"
+                                   name="kondisi"
+                                   class="form-control"
+                                   placeholder="Contoh: Baik / Rusak Ringan"
+                                   required>
 
                         </div>
 

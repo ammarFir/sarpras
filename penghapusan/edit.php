@@ -17,24 +17,24 @@ if(isset($_POST['update'])){
     $id_sarana_lama      = $d['id_sarana'];
     $jumlah_lama         = $d['jumlah'];
 
-    $id_sarana_baru      = (int) $_POST['id_sarana'];
+    $id_sarana_baru      = mysqli_real_escape_string($conn, $_POST['id_sarana']);
     $jumlah_baru         = (int) $_POST['jumlah'];
     $alasan              = mysqli_real_escape_string($conn, $_POST['alasan']);
     $no_berita_acara     = mysqli_real_escape_string($conn, $_POST['no_berita_acara']);
 
     // LOGIKA SINKRONISASI STOK:
-    // 1. Kembalikan stok lama (tambahkan lagi)
+    // 1. Kembalikan stok lama (tambahkan lagi berdasarkan nama barang lama)
     mysqli_query($conn,"
         UPDATE tabel_sarana
         SET jumlah = jumlah + $jumlah_lama
-        WHERE id_sarana='$id_sarana_lama'
+        WHERE nama_barang='$id_sarana_lama'
     ");
 
-    // 2. Kurangi stok baru (jika barangnya sama, otomatis jadi netral)
+    // 2. Kurangi stok baru (berdasarkan nama barang baru)
     mysqli_query($conn,"
         UPDATE tabel_sarana
         SET jumlah = jumlah - $jumlah_baru
-        WHERE id_sarana='$id_sarana_baru'
+        WHERE nama_barang='$id_sarana_baru'
     ");
 
     // 3. Update data penghapusan
@@ -90,18 +90,8 @@ if(isset($_POST['update'])){
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Pilih Barang (Sarana)</label>
-                    <select name="id_sarana" class="form-select" required>
-                        <option value="">-- Pilih Barang --</option>
-                        <?php
-                        $sarana = mysqli_query($conn,"SELECT id_sarana, kode_barang, nama_barang, jumlah FROM tabel_sarana ORDER BY nama_barang ASC");
-                        while($s = mysqli_fetch_assoc($sarana)){
-                        ?>
-                        <option value="<?= $s['id_sarana']; ?>" <?= ($d['id_sarana'] == $s['id_sarana']) ? 'selected' : ''; ?>>
-                            <?= htmlspecialchars($s['kode_barang'] . ' - ' . $s['nama_barang'] . ' (Stok saat ini: ' . $s['jumlah'] . ')'); ?>
-                        </option>
-                        <?php } ?>
-                    </select>
+                    <label class="form-label">Nama Barang (Sarana)</label>
+                    <input type="text" name="id_sarana" class="form-control" value="<?= htmlspecialchars($d['id_sarana']); ?>" required>
                     <small class="text-muted">*Jika Anda mengganti barang, stok barang lama akan dikembalikan, dan stok barang baru akan dikurangi.</small>
                 </div>
 
@@ -117,11 +107,7 @@ if(isset($_POST['update'])){
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Alasan Penghapusan</label>
-                            <select name="alasan" class="form-select" required>
-                                <option value="Rusak Berat" <?= ($d['alasan'] == 'Rusak Berat') ? 'selected' : ''; ?>>Rusak Berat</option>
-                                <option value="Hilang" <?= ($d['alasan'] == 'Hilang') ? 'selected' : ''; ?>>Hilang</option>
-                                <option value="Usang" <?= ($d['alasan'] == 'Usang') ? 'selected' : ''; ?>>Usang</option>
-                            </select>
+                            <input type="text" name="alasan" class="form-control" value="<?= htmlspecialchars($d['alasan']); ?>" required>
                         </div>
                     </div>
 

@@ -16,23 +16,23 @@ if(isset($_POST['update'])){
 
     $tanggal_perbaikan  = mysqli_real_escape_string($conn, $_POST['tanggal_perbaikan']);
     $jenis_aset         = $_POST['jenis_aset'];
-    $id_sarana          = ($jenis_aset == 'sarana') ? (int)$_POST['id_sarana'] : 'NULL';
-    $id_gedung          = ($jenis_aset == 'gedung') ? (int)$_POST['id_gedung'] : 'NULL';
+    $id_sarana          = mysqli_real_escape_string($conn, $_POST['id_sarana']);
+    $id_gedung          = mysqli_real_escape_string($conn, $_POST['id_gedung']);
     
     $deskripsi_kerusakan = mysqli_real_escape_string($conn, $_POST['deskripsi_kerusakan']);
     $tindakan_perbaikan  = mysqli_real_escape_string($conn, $_POST['tindakan_perbaikan']);
     $biaya               = (float) $_POST['biaya'];
     $status              = mysqli_real_escape_string($conn, $_POST['status']);
 
-    $id_sarana_query = ($id_sarana === 'NULL') ? "NULL" : "'$id_sarana'";
-    $id_gedung_query = ($id_gedung === 'NULL') ? "NULL" : "'$id_gedung'";
+    $id_sarana_db = ($jenis_aset == 'sarana') ? "'$id_sarana'" : "NULL";
+    $id_gedung_db = ($jenis_aset == 'gedung') ? "'$id_gedung'" : "NULL";
 
     mysqli_query($conn,"
         UPDATE tabel_pemeliharaan
         SET
             tanggal_perbaikan='$tanggal_perbaikan',
-            id_sarana=$id_sarana_query,
-            id_gedung=$id_gedung_query,
+            id_sarana=$id_sarana_db,
+            id_gedung=$id_gedung_db,
             deskripsi_kerusakan='$deskripsi_kerusakan',
             tindakan_perbaikan='$tindakan_perbaikan',
             biaya='$biaya',
@@ -77,36 +77,16 @@ if(isset($_POST['update'])){
                     </div>
                 </div>
 
-                <!-- Dropdown Sarana -->
+                <!-- Input Sarana -->
                 <div class="mb-3 <?= ($jenis_aset_skrg == 'gedung') ? 'd-none' : ''; ?>" id="box_sarana">
-                    <label class="form-label">Pilih Barang (Sarana)</label>
-                    <select name="id_sarana" class="form-select">
-                        <option value="">-- Pilih Barang --</option>
-                        <?php
-                        $sarana = mysqli_query($conn,"SELECT id_sarana, kode_barang, nama_barang FROM tabel_sarana ORDER BY nama_barang ASC");
-                        while($s = mysqli_fetch_assoc($sarana)){
-                        ?>
-                        <option value="<?= $s['id_sarana']; ?>" <?= ($d['id_sarana'] == $s['id_sarana']) ? 'selected' : ''; ?>>
-                            <?= htmlspecialchars($s['kode_barang'] . ' - ' . $s['nama_barang']); ?>
-                        </option>
-                        <?php } ?>
-                    </select>
+                    <label class="form-label">Nama Barang (Sarana)</label>
+                    <input type="text" name="id_sarana" class="form-control" value="<?= htmlspecialchars($d['id_sarana'] ?? ''); ?>">
                 </div>
 
-                <!-- Dropdown Gedung -->
+                <!-- Input Gedung -->
                 <div class="mb-3 <?= ($jenis_aset_skrg == 'sarana') ? 'd-none' : ''; ?>" id="box_gedung">
-                    <label class="form-label">Pilih Gedung (Prasarana)</label>
-                    <select name="id_gedung" class="form-select">
-                        <option value="">-- Pilih Gedung --</option>
-                        <?php
-                        $gedung = mysqli_query($conn,"SELECT id_gedung, kode_gedung, nama_gedung FROM tabel_prasarana_gedung ORDER BY nama_gedung ASC");
-                        while($g = mysqli_fetch_assoc($gedung)){
-                        ?>
-                        <option value="<?= $g['id_gedung']; ?>" <?= ($d['id_gedung'] == $g['id_gedung']) ? 'selected' : ''; ?>>
-                            <?= htmlspecialchars($g['kode_gedung'] . ' - ' . $g['nama_gedung']); ?>
-                        </option>
-                        <?php } ?>
-                    </select>
+                    <label class="form-label">Nama Gedung (Prasarana)</label>
+                    <input type="text" name="id_gedung" class="form-control" value="<?= htmlspecialchars($d['id_gedung'] ?? ''); ?>">
                 </div>
 
                 <div class="mb-3">
@@ -126,11 +106,7 @@ if(isset($_POST['update'])){
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Status Pengerjaan</label>
-                        <select name="status" class="form-select" required>
-                            <option value="Proses" <?= ($d['status'] == 'Proses') ? 'selected' : ''; ?>>Proses</option>
-                            <option value="Selesai" <?= ($d['status'] == 'Selesai') ? 'selected' : ''; ?>>Selesai</option>
-                            <option value="Gagal" <?= ($d['status'] == 'Gagal') ? 'selected' : ''; ?>>Gagal</option>
-                        </select>
+                        <input type="text" name="status" class="form-control" value="<?= htmlspecialchars($d['status']); ?>" required>
                     </div>
                 </div>
 

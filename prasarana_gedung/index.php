@@ -68,23 +68,7 @@ $data = mysqli_query($conn,"
 
                         <td><?= htmlspecialchars($d['tahun_dibangun'] ?? '-'); ?></td>
 
-                        <td>
-
-                            <?php if($d['kondisi'] == 'Baik'){ ?>
-
-                                <span class="badge bg-success">Baik</span>
-
-                            <?php }elseif($d['kondisi'] == 'Rusak Ringan'){ ?>
-
-                                <span class="badge bg-warning text-dark">Rusak Ringan</span>
-
-                            <?php }else{ ?>
-
-                                <span class="badge bg-danger">Rusak Berat</span>
-
-                            <?php } ?>
-
-                        </td>
+                        <td><?= htmlspecialchars($d['kondisi']); ?></td>
 
                         <td>
 
