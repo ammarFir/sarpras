@@ -2,13 +2,9 @@
 include __DIR__ . '/../config.php';
 
 $data = mysqli_query($conn,"
-    SELECT
-        p.*,
-        s.nama_barang,
-        s.kode_barang
-    FROM tabel_peminjaman p
-    LEFT JOIN tabel_sarana s ON p.id_sarana = s.id_sarana
-    ORDER BY p.tanggal_pinjam DESC
+    SELECT *
+    FROM tabel_peminjaman
+    ORDER BY tanggal_pinjam DESC
 ");
 ?>
 
@@ -52,7 +48,7 @@ body { font-family: Arial, Helvetica, sans-serif; }
 
             <!-- KOP SURAT -->
             <div class="kop-surat">
-                <img src="../assets/logokemenagnew.png" alt="Logo Kemenag">
+                <img src="/sarpras/assets/logokemenagnew.png" alt="Logo Kemenag">
                 <div class="kop-text">
                     <h2>MADRASAH TSANAWIYAH NEGERI 3 KOTA BANJARMASIN</h2>
                     <p>Jalan Bhakti No. 04 Rt.32 Pemurus Dalam Banjarmasin</p>
@@ -88,7 +84,7 @@ body { font-family: Arial, Helvetica, sans-serif; }
                         <td><?= $no++; ?></td>
                         <td><?= htmlspecialchars($d['kode_peminjaman']); ?></td>
                         <td><?= htmlspecialchars($d['nama_peminjam']); ?></td>
-                        <td><?= htmlspecialchars($d['nama_barang'] ?? '-'); ?></td>
+                        <td><?= htmlspecialchars($d['id_sarana'] ?? '-'); ?></td>
                         <td><?= date('d-m-Y', strtotime($d['tanggal_pinjam'])); ?></td>
                         <td><?= date('d-m-Y', strtotime($d['rencana_kembali'])); ?></td>
                         <td><?= htmlspecialchars($d['status']); ?></td>

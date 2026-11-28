@@ -1,3 +1,3 @@
 <?php
-header("Location: halaman.php");
+header("Location: login.php");
 exit;

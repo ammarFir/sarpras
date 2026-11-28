@@ -41,7 +41,7 @@ $data = mysqli_query($conn,"
                         <th>Nama Barang</th>
                         <th>Jumlah Masuk</th>
                         <th>Sumber Dana</th>
-                        <th width="170">Aksi</th>
+                        <th width="250">Aksi</th>
                     </tr>
 
                 </thead>
@@ -69,6 +69,12 @@ $data = mysqli_query($conn,"
                         <td><?= htmlspecialchars($d['id_sumber_dana']); ?></td>
 
                         <td>
+
+                            <a href="halaman.php?menu=barang_masuk_print&id=<?= $d['id_barang_masuk']; ?>"
+                               target="_blank"
+                               class="btn btn-secondary btn-sm">
+                                Cetak Nota
+                            </a>
 
                             <a href="halaman.php?menu=barang_masuk_edit&id=<?= $d['id_barang_masuk']; ?>"
                                class="btn btn-warning btn-sm">

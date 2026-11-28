@@ -2,16 +2,9 @@
 include __DIR__ . '/../config.php';
 
 $data = mysqli_query($conn,"
-    SELECT
-        s.*,
-        k.nama_kategori,
-        r.nama_ruangan,
-        d.keterangan AS sumber_dana
-    FROM tabel_sarana s
-    LEFT JOIN tabel_kategori k ON s.id_kategori = k.id_kategori
-    LEFT JOIN tabel_ruangan r ON s.id_ruangan = r.id_ruangan
-    LEFT JOIN tabel_sumber_dana d ON s.id_sumber_dana = d.id_sumber_dana
-    ORDER BY s.nama_barang ASC
+    SELECT *
+    FROM tabel_sarana
+    ORDER BY nama_barang ASC
 ");
 ?>
 
@@ -97,7 +90,7 @@ body {
 
             <!-- KOP SURAT -->
             <div class="kop-surat">
-                <img src="../assets/logokemenagnew.png" alt="Logo Kemenag">
+                <img src="/sarpras/assets/logokemenagnew.png" alt="Logo Kemenag">
                 <div class="kop-text">
                     <h2>MADRASAH TSANAWIYAH NEGERI 3 KOTA BANJARMASIN</h2>
                     <p>Jalan Bhakti No. 04 Rt.32 Pemurus Dalam Banjarmasin</p>
@@ -133,8 +126,8 @@ body {
                         <td><?= $no++; ?></td>
                         <td><?= htmlspecialchars($d['kode_barang']); ?></td>
                         <td><?= htmlspecialchars($d['nama_barang']); ?></td>
-                        <td><?= htmlspecialchars($d['nama_kategori'] ?? '-'); ?></td>
-                        <td><?= htmlspecialchars($d['nama_ruangan'] ?? '-'); ?></td>
+                        <td><?= htmlspecialchars($d['id_kategori'] ?? '-'); ?></td>
+                        <td><?= htmlspecialchars($d['id_ruangan'] ?? '-'); ?></td>
                         <td><?= $d['jumlah']; ?></td>
                         <td><?= htmlspecialchars($d['kondisi']); ?></td>
                     </tr>

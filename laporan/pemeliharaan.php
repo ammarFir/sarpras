@@ -2,14 +2,9 @@
 include __DIR__ . '/../config.php';
 
 $data = mysqli_query($conn,"
-    SELECT
-        pm.*,
-        s.nama_barang AS nama_sarana,
-        g.nama_gedung
-    FROM tabel_pemeliharaan pm
-    LEFT JOIN tabel_sarana s ON pm.id_sarana = s.id_sarana
-    LEFT JOIN tabel_prasarana_gedung g ON pm.id_gedung = g.id_gedung
-    ORDER BY pm.tanggal_perbaikan DESC
+    SELECT *
+    FROM tabel_pemeliharaan
+    ORDER BY tanggal_perbaikan DESC
 ");
 ?>
 
@@ -53,7 +48,7 @@ body { font-family: Arial, Helvetica, sans-serif; }
 
             <!-- KOP SURAT -->
             <div class="kop-surat">
-                <img src="../assets/logokemenagnew.png" alt="Logo Kemenag">
+                <img src="/sarpras/assets/logokemenagnew.png" alt="Logo Kemenag">
                 <div class="kop-text">
                     <h2>MADRASAH TSANAWIYAH NEGERI 3 KOTA BANJARMASIN</h2>
                     <p>Jalan Bhakti No. 04 Rt.32 Pemurus Dalam Banjarmasin</p>
@@ -83,9 +78,9 @@ body { font-family: Arial, Helvetica, sans-serif; }
                     <?php 
                     $no = 1; 
                     while($d = mysqli_fetch_assoc($data)){ 
-                        $nama_aset = $d['nama_sarana'];
-                        if($d['nama_gedung']){
-                            $nama_aset = "Gedung: " . $d['nama_gedung'];
+                        $nama_aset = $d['id_sarana'];
+                        if($d['id_gedung']){
+                            $nama_aset = "Gedung: " . $d['id_gedung'];
                         }
                     ?>
                     <tr>

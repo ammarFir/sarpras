@@ -54,7 +54,7 @@ body { font-family: Arial, Helvetica, sans-serif; }
 
             <!-- KOP SURAT -->
             <div class="kop-surat">
-                <img src="../assets/logokemenagnew.png" alt="Logo Kemenag">
+              <img src="/sarpras/assets/logokemenagnew.png" alt="Logo Kemenag">
                 <div class="kop-text">
                     <h2>MADRASAH TSANAWIYAH NEGERI 3 KOTA BANJARMASIN</h2>
                     <p>Jalan Bhakti No. 04 Rt.32 Pemurus Dalam Banjarmasin</p>

@@ -1,20 +1,10 @@
-
-
 <?php
 include __DIR__ . '/../config.php';
 
 $data = mysqli_query($conn,"
-    SELECT
-        m.*,
-        s.nama_barang,
-        s.kode_barang,
-        asal.nama_ruangan AS ruangan_asal,
-        tujuan.nama_ruangan AS ruangan_tujuan
-    FROM tabel_mutasi m
-    LEFT JOIN tabel_sarana s ON m.id_sarana = s.id_sarana
-    LEFT JOIN tabel_ruangan asal ON m.id_ruangan_asal = asal.id_ruangan
-    LEFT JOIN tabel_ruangan tujuan ON m.id_ruangan_tujuan = tujuan.id_ruangan
-    ORDER BY m.tanggal_mutasi DESC
+    SELECT *
+    FROM tabel_mutasi
+    ORDER BY tanggal_mutasi DESC
 ");
 ?>
 
@@ -56,11 +46,9 @@ body { font-family: Arial, Helvetica, sans-serif; }
 
         <div class="card-body">
 
-     
-
             <!-- KOP SURAT -->
             <div class="kop-surat">
-                <img src="../assets/logokemenagnew.png" alt="Logo Kemenag">
+                <img src="/sarpras/assets/logokemenagnew.png" alt="Logo Kemenag">
                 <div class="kop-text">
                     <h2>MADRASAH TSANAWIYAH NEGERI 3 KOTA BANJARMASIN</h2>
                     <p>Jalan Bhakti No. 04 Rt.32 Pemurus Dalam Banjarmasin</p>
@@ -94,9 +82,9 @@ body { font-family: Arial, Helvetica, sans-serif; }
                     <tr>
                         <td><?= $no++; ?></td>
                         <td><?= date('d-m-Y', strtotime($d['tanggal_mutasi'])); ?></td>
-                        <td><?= htmlspecialchars($d['nama_barang'] ?? '-'); ?></td>
-                        <td><?= htmlspecialchars($d['ruangan_asal'] ?? '-'); ?></td>
-                        <td><?= htmlspecialchars($d['ruangan_tujuan'] ?? '-'); ?></td>
+                        <td><?= htmlspecialchars($d['id_sarana'] ?? '-'); ?></td>
+                        <td><?= htmlspecialchars($d['id_ruangan_asal'] ?? '-'); ?></td>
+                        <td><?= htmlspecialchars($d['id_ruangan_tujuan'] ?? '-'); ?></td>
                         <td><?= $d['jumlah']; ?></td>
                     </tr>
                     <?php } ?>

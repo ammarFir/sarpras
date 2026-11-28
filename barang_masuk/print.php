@@ -4,15 +4,9 @@ include __DIR__ . '/../config.php';
 $id = $_GET['id'];
 
 $data = mysqli_query($conn,"
-    SELECT
-        bm.*,
-        s.nama_barang,
-        s.kode_barang,
-        d.keterangan AS sumber_dana
-    FROM tabel_barang_masuk bm
-    LEFT JOIN tabel_sarana s ON bm.id_sarana = s.id_sarana
-    LEFT JOIN tabel_sumber_dana d ON bm.id_sumber_dana = d.id_sumber_dana
-    WHERE bm.id_barang_masuk='$id'
+    SELECT *
+    FROM tabel_barang_masuk
+    WHERE id_barang_masuk='$id'
 ");
 
 $d = mysqli_fetch_assoc($data);
@@ -155,7 +149,7 @@ body{
             <!-- ================= KOP SURAT ================= -->
             <div class="kop-surat">
 
-                <img src="../assets/logokemenagnew.png" alt="Logo Kemenag">
+                <img src="/sarpras/assets/logokemenagnew.png" alt="Logo Kemenag">
 
                 <div class="kop-text">
                     <h2>MADRASAH TSANAWIYAH NEGERI 3 KOTA BANJARMASIN</h2>
@@ -186,7 +180,7 @@ body{
                     <tr>
                         <td><strong>Sumber Dana</strong></td>
                         <td>:</td>
-                        <td><?= htmlspecialchars($d['sumber_dana'] ?? '-'); ?></td>
+                        <td><?= htmlspecialchars($d['id_sumber_dana'] ?? '-'); ?></td>
                     </tr>
                 </table>
             </div>
@@ -196,7 +190,6 @@ body{
                 <thead>
                     <tr>
                         <th width="50">No</th>
-                        <th>Kode Barang</th>
                         <th>Nama Barang</th>
                         <th>Jumlah Masuk</th>
                     </tr>
@@ -204,8 +197,7 @@ body{
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td><?= htmlspecialchars($d['kode_barang']); ?></td>
-                        <td><?= htmlspecialchars($d['nama_barang']); ?></td>
+                        <td><?= htmlspecialchars($d['id_sarana']); ?></td>
                         <td><?= $d['jumlah_masuk']; ?> Unit</td>
                     </tr>
                 </tbody>
